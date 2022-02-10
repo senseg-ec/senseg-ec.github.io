@@ -1,0 +1,93 @@
+:root {
+    --green: #175900;
+    --gold: #F4B000;
+    --fade: #8a8a8a;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body{
+  font-family: 'Roboto Mono', monospace;
+  color: #000000;
+}
+
+.container{
+  height: 100%;
+  width: 100%;
+}
+
+.store-btn{
+  width: 100%;
+}
+
+#logo{
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  margin-top: 16vh;
+}
+
+.subtitle{
+  font-size: 25px;
+  padding-top: 25px;
+  width: 100%;
+  text-align: center;
+}
+
+.store-wrapper{
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#play-store-btn{
+  width: 226px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+#app-store-btn{
+  width: 200px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+a{
+  color: var(--fade);
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+  color: var(--green);
+}
+
+.footer{
+  font-size: 12px;
+  padding-top: 100px;
+  display: block;
+}
+
+@media screen and (min-width: 640px) {
+
+}
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1024px) {
+
+}
+
+@media screen and (min-width: 1280px) {
+
+}
+
+@media screen and (min-width: 1536px) {
+
+}
