@@ -30,6 +30,24 @@ body{
   margin-top: 16vh;
 }
 
+.directory-title{
+  font-size: 30px;
+  width: 100%
+}
+
+.dir-title-text{
+  float: left;
+  padding: 5px;
+}
+
+.dir-logo-wrapper{
+  float: right;
+}
+
+.dir-logo{
+  width: 50px;
+}
+
 .subtitle{
   font-size: 25px;
   padding-top: 25px;
@@ -41,6 +59,12 @@ body{
   width: 100%;
   text-align: center;
   margin-top: 50px;
+}
+
+.directory-wrapper{
+  width: 100%;
+  text-align: left;
+  margin-top: 5px;
 }
 
 #play-store-btn{
@@ -77,11 +101,36 @@ a:hover{
   #logo{
     margin-top: 8vh;
   }
+
+  .directory-title{
+    font-size: 12px;
+  }
+
+  .dir-title-text{
+    padding: 0px;
+  }
+
+  .dir-logo{
+    width: 20px;
+  }
+
 }
 
 @media screen and (min-width: 640px) {
   #logo{
     margin-top: 10vh;
+  }
+
+  .directory-title{
+    font-size: 14px;
+  }
+
+  .dir-title-text{
+    padding: 2px;
+  }
+
+  .dir-logo{
+    width: 25px;
   }
 }
 
@@ -89,11 +138,35 @@ a:hover{
   #logo{
     margin-top: 12vh;
   }
+
+  .directory-title{
+    font-size: 16px;
+  }
+
+  .dir-title-text{
+    padding: 3px;
+  }
+
+  .dir-logo{
+    width: 25px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   #logo{
     margin-top: 14vh;
+  }
+
+  .directory-title{
+    font-size: 20px;
+  }
+
+  .dir-title-text{
+    padding: 4px;
+  }
+
+  .dir-logo{
+    width: 40px;
   }
 }
 
