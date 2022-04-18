@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;1,300;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <br><br>
+    <input id="input" placeholder="qr-encode-string"></input> <button onclick="draw()">draw</button> <a id="dl-btn"><button>download PNG</button></a>
+    <br><br><br>
+    <canvas id="myCanvas" width="610" height="610" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML canvas tag.</canvas>
+
+    <script>
+      function draw(){
+        // initialize variables
+        const qr_size = 600;
+        var canvas = document.getElementById("myCanvas");
+        const w = canvas.width;
+        const h = canvas.height;
+        var ctx = canvas.getContext("2d");
+        const to_encode_string = document.getElementById("input").value;
+
+        // make QR png element
+        var qr_div = document.createElement("div");
+        var qrcode = new QRCode(qr_div, {
+        	width : qr_size * 4,
+        	height : qr_size * 4,
+          colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+        });
+        qrcode.makeCode(to_encode_string);
+        var qr_img_elem = qr_div.childNodes[1];
+        qr_img_elem.onload = function(){
+          //make downloadable
+          qr_img_elem.crossorigin="anonymous";
+
+          // set canvas white background for png
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0,0,w,h);
+          ctx.save(); // so we can transform QR drawn to center, rotated
+          //Set the origin to the center of the image
+          ctx.translate(w/2, h/2);
+          //draw the image
+          ctx.drawImage(qr_img_elem, -qr_size/2, -qr_size/2, qr_size, qr_size);
+          ctx.restore(); // Restore canvas state as saved from above, for text and further drawing.
+          // prep png for download
+          var anchor = document.getElementById("dl-btn");
+          anchor.href = canvas.toDataURL("image/png");
+          anchor.download = to_encode_string + "-qr.PNG";
+        }
+
+      }
+
+      // set enter key to trigger draw function
+      $("#input").on("keydown", function (e) {
+      		if (e.keyCode == 13) {
+      			draw();
+      		}
+      	});
+
+
+    </script>
+
+    <br><br>
+  </body>
+</html>
