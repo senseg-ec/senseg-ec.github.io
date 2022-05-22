@@ -24,6 +24,15 @@ html {
   color: #fff;
 }
 
+.cta-button:hover{
+  cursor: pointer;
+  border-radius:0.6em;
+  padding-left:25px;
+  padding-right:25px;
+  color: black;
+  background-color: white;
+}
+
 .cta-replace{
   border: 2px solid transparent;
   padding: 12px;
