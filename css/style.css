@@ -9,6 +9,35 @@ html {
   text-size-adjust: 100%;
 }
 
+.cta-button{
+  display: inline-block;
+  border: 2px solid black;
+  padding: 12px;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius: 2em;
+  transition: 0.2s;
+  font-size: 1.15em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  background-color: black;
+  color: #fff;
+}
+
+.cta-replace{
+  border: 2px solid transparent;
+  padding: 12px;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius: 2em;
+  transition: 0.2s;
+  font-size: 1.15em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  display: none;
+  color: var(--theme-grey);
+}
+
 body{
   font-family: 'Roboto Mono', monospace;
   color: #000000;

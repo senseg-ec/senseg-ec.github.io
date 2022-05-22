@@ -1,0 +1,132 @@
+<!doctype html>
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <title>Senseg</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="description" content="Senseg terms of use and privacy policy.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/img/logo-rounded-small.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;1,300;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <div id="deposit-100-btn" class="cta-button" onclick="goToStripe('deposit-100-btn','deposit-100-redirecting','deposit-100')">Deposit $100</div>
+
+    <div id="deposit-100-redirecting" class="cta-replace">Loading Checkout</div>
+
+
+    <script>
+      var stripe = Stripe('pk_live_51I4z07DmqJwbTDJD2MyELRnWhxe0lFQnO9wyCAdAq0OfTXiKqHkj8e5j98AezGqPX9r2NSUWzNfQG7lUEdp9cmu400kpwTjeAs');
+
+      var live_site_url = "https://senseg.net";
+
+      // order options for stripe price items
+      var product_dict = {
+        'deposit-100': ['price_1L2GTIDmqJwbTDJDEgVowYRO'],
+        'deposit-50': ['price_1L2GTIDmqJwbTDJDldKhtihS'],
+        'deposit-25': ['price_1L2GTIDmqJwbTDJDdevhj3gl'],
+        'deposit-10': ['price_1L2GTIDmqJwbTDJD2BzsSFiQ']
+      };
+
+      // define function to replace buttons with redirect pending text
+      function redirectDots(id_btn, id_replace, url = live_site_url, change_window = true) {
+        var max_dots = 15;
+
+        var cta_button = document.getElementById(id_btn);
+        var cta_replace = document.getElementById(id_replace);
+
+        cta_button.style.display = "none";
+        cta_replace.style.display = "inline-block";
+
+        if (change_window) {
+          window.location.href = url;
+        }
+
+        var dot_count = 0;
+        var dotTrigger = setInterval(loadDots, 333);
+        function loadDots() {
+          if (dot_count >= max_dots){
+            stopDots();
+            return;
+          }
+          cta_replace.innerHTML += ' .';
+          dot_count += 1;
+          return;
+        }
+
+        function stopDots(){
+          clearInterval(dotTrigger);
+          cta_replace.innerHTML = 'Redirecting';
+          cta_button.style.display = "inline-block";
+          cta_replace.style.display = "none";
+          return;
+        }
+        return;
+      }
+
+      // define function going to stripe checkout
+      function goToStripe(id_btn, id_replace, product){
+
+        // get price objects for checkout
+        var stripe_price_list = product_dict[product];
+        var items = [];
+        for (code of stripe_price_list){
+          items.push({
+            price: code,
+            quantity: 1
+          });
+        }
+
+        // start redirect animation
+        redirectDots(id_btn, id_replace, live_site_url, change_window = false);
+
+        // go to stripe
+        stripe.redirectToCheckout({
+          lineItems: items,
+          mode: 'payment',
+          successUrl: 'https://senseg.net/vilca',
+          cancelUrl: 'https://senseg.net/stripe'
+        }).then(function (result) {
+          // If `redirectToCheckout` fails due to a browser or network
+          // error, display the localized error message to your customer
+          // using `result.error.message`.
+          window.location.href = 'stripe.html';
+          alert("Sorry, we encountered an error...please try again! Error message: " + `result.error.message`);
+        }).catch(function(err){
+          window.location.href = 'stripe.html';
+          alert('Sorry, looks like we have an unexpected error going to the checkout page. This is not supposed to happen, and we will be working to fix it right away. You may contact us using the info provided in the FAQ section, and we will get your order processed right away!  \n\nError Message:\n' + `${err.message}`);
+        });
+
+        return;
+      }
+    </script>
+
+
+    </div>
+
+
+    <div class="footer">
+      <a href="/">&larr;Home</a><br><br>
+      <a href="https://andytrattner.com">© Copyright, Andrew L. Trattner 2022</a><br>
+      <a href="/legal"><i>legal</i></a>
+      <br><br>
+    </div>
+
+  </div>
+
+</body>
